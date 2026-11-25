@@ -15,9 +15,9 @@
 </script>
 <style>
   :root {
-    --bg: #070b19;
-    --card: #0f172a;
-    --card-border: #1e293b;
+    --bg: #060a17;
+    --card: rgba(15, 23, 42, 0.92);
+    --card-border: rgba(148, 163, 184, 0.16);
     --primary: #3b82f6;
     --accent: #06b6d4;
     --text: #f8fafc;
@@ -27,70 +27,158 @@
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: radial-gradient(circle at top, #0f1c3f 0%, var(--bg) 55%);
+    background:
+      radial-gradient(circle at 15% 10%, rgba(37, 99, 235, 0.24), transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(6, 182, 212, 0.18), transparent 42%),
+      var(--bg);
     color: var(--text);
     font-family: "Segoe UI", Arial, "Noto Sans Bengali", sans-serif;
     min-height: 100vh;
-    padding-bottom: 85px;
+    padding-bottom: 96px;
   }
   header {
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(12px);
+    background: rgba(10, 16, 32, 0.88);
+    backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--card-border);
-    padding: 18px 16px;
+    padding: 16px;
     text-align: center;
     position: sticky;
     top: 0;
     z-index: 20;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   }
   header h1 {
     margin: 0;
     font-size: 24px;
     font-weight: 800;
-    letter-spacing: 0.8px;
-    background: linear-gradient(90deg, #60a5fa, #22d3ee, #818cf8);
+    letter-spacing: 0.6px;
+    background: linear-gradient(90deg, #60a5fa, #22d3ee, #a5b4fc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   header p { margin: 6px 0 0; font-size: 13.5px; color: #cbd5e1; line-height: 1.5; }
-  .wrap { max-width: 760px; margin: auto; padding: 14px; }
+  .wrap { max-width: 780px; margin: auto; padding: 14px; }
   .hidden { display: none !important; }
 
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 14px 0 18px;
+  }
   .btn-3d-live {
     position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     width: 100%;
-    padding: 16px 20px;
-    margin: 14px 0 22px;
-    font-size: 17px;
+    padding: 15px 14px;
+    font-size: 15px;
     font-weight: 800;
     color: #ffffff;
-    background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
-    border: 1px solid #60a5fa;
-    border-radius: 14px;
+    background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+    border: 1px solid rgba(254, 202, 202, 0.45);
+    border-radius: 15px;
     cursor: pointer;
     overflow: hidden;
-    box-shadow: 0 6px 0 #1e3a8a, 0 12px 24px rgba(37, 99, 235, 0.45);
-    transition: transform 0.12s, box-shadow 0.12s;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    box-shadow: 0 6px 0 #7f1d1d, 0 12px 22px rgba(220, 38, 38, 0.4);
+    transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease;
   }
+  .btn-3d-live:hover { filter: brightness(1.06); }
   .btn-3d-live:active {
     transform: translateY(4px);
-    box-shadow: 0 2px 0 #1e3a8a, 0 6px 12px rgba(37, 99, 235, 0.35);
+    box-shadow: 0 2px 0 #7f1d1d, 0 5px 10px rgba(220, 38, 38, 0.3);
   }
-  .btn-3d-live::before {
+
+  .btn-3d-syllabus {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 15px 14px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(180deg, #0ea5e9 0%, #1d4ed8 100%);
+    border: 1px solid rgba(186, 230, 253, 0.45);
+    border-radius: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 6px 0 #1e3a8a, 0 12px 22px rgba(29, 78, 216, 0.42);
+    transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease;
+  }
+  .btn-3d-syllabus:hover { filter: brightness(1.06); }
+  .btn-3d-syllabus:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #1e3a8a, 0 5px 10px rgba(29, 78, 216, 0.32);
+  }
+
+  .btn-3d-ai {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 12px;
+    font-size: 14.5px;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(180deg, #10b981 0%, #047857 100%);
+    border: 1px solid rgba(167, 243, 208, 0.48);
+    border-radius: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 6px 0 #064e3b, 0 12px 22px rgba(16, 185, 129, 0.38);
+    transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease;
+  }
+  .btn-3d-ai:hover { filter: brightness(1.06); }
+  .btn-3d-ai:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #064e3b, 0 5px 10px rgba(16, 185, 129, 0.28);
+  }
+
+  .btn-3d-chat {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 12px;
+    font-size: 14.5px;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(180deg, #8b5cf6 0%, #5b21b6 100%);
+    border: 1px solid rgba(221, 214, 254, 0.48);
+    border-radius: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 6px 0 #3b0764, 0 12px 22px rgba(124, 58, 237, 0.38);
+    transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease;
+  }
+  .btn-3d-chat:hover { filter: brightness(1.06); }
+  .btn-3d-chat:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #3b0764, 0 5px 10px rgba(124, 58, 237, 0.28);
+  }
+
+  .btn-3d-live::before, .btn-3d-syllabus::before, .btn-3d-ai::before, .btn-3d-chat::before {
     content: "";
     position: absolute;
     top: 0; left: -120%;
-    width: 80%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.85), rgba(255,255,255,0.9), transparent);
+    width: 75%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
     transform: skewX(-25deg);
-    animation: sweepBlue 2.4s infinite linear;
+    animation: sweepShine 2.7s infinite linear;
   }
-  @keyframes sweepBlue {
+
+  @keyframes sweepShine {
     0% { left: -120%; }
-    100% { left: 160%; }
+    100% { left: 165%; }
   }
 
   .section-title {
@@ -115,31 +203,64 @@
     border-radius: 18px;
     padding: 16px;
     margin-bottom: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
   }
-  .course-card { padding: 0; overflow: hidden; }
+  .course-card { padding: 0; overflow: hidden; transition: transform 0.2s ease, border-color 0.2s ease; }
+  .course-card:hover { transform: translateY(-2px); border-color: rgba(56, 189, 248, 0.35); }
   .course-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; background: #1e293b; }
   .course-body { padding: 16px; }
   .course-body h3 { margin: 0 0 12px; font-size: 18px; color: #f8fafc; }
 
   button.btn {
-    width: 100%; padding: 13px 16px; border: none; border-radius: 12px;
-    background: linear-gradient(135deg, #2563eb, #0284c7); color: white;
-    font-size: 15px; font-weight: 700; cursor: pointer;
-    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    position: relative;
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid rgba(147, 197, 253, 0.35);
+    border-radius: 13px;
+    background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #1e3a8a, 0 10px 20px rgba(37, 99, 235, 0.35);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
   }
-  button.btn-green { background: linear-gradient(135deg, #059669, #10b981); }
+  button.btn:hover { filter: brightness(1.06); }
+  button.btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #1e3a8a, 0 4px 10px rgba(37, 99, 235, 0.28);
+  }
+  button.btn-green {
+    background: linear-gradient(180deg, #10b981 0%, #047857 100%);
+    border-color: rgba(110, 231, 183, 0.35);
+    box-shadow: 0 4px 0 #064e3b, 0 10px 20px rgba(16, 185, 129, 0.32);
+  }
+  button.btn-green:active {
+    box-shadow: 0 1px 0 #064e3b, 0 4px 10px rgba(16, 185, 129, 0.25);
+  }
   button.btn-back {
-    background: #1e293b; color: #e2e8f0; border: 1px solid #334155;
-    padding: 9px 14px; border-radius: 10px; font-size: 14px; font-weight: 600;
-    cursor: pointer; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 6px;
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    color: #e2e8f0;
+    border: 1px solid #334155;
+    padding: 9px 14px;
+    border-radius: 11px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 3px 0 #020617;
   }
+  button.btn-back:active { transform: translateY(2px); box-shadow: 0 1px 0 #020617; }
 
   label { display: block; font-size: 13.5px; color: #cbd5e1; margin: 10px 0 4px; font-weight: 600; }
   input, select {
-    width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155;
-    background: #0b1120; color: #f8fafc; font-size: 14px; outline: none;
+    width: 100%; padding: 12px; border-radius: 11px; border: 1px solid #334155;
+    background: #090f1d; color: #f8fafc; font-size: 14px; outline: none;
   }
+  input:focus, select:focus { border-color: #38bdf8; }
   input[type="file"] { padding: 9px; font-size: 12.5px; }
 
   .fee-display {
@@ -153,6 +274,25 @@
     border-radius: 12px; padding: 14px; text-align: center; margin: 12px 0;
   }
   .pay-number { font-size: 24px; font-weight: 800; color: #fbbf24; margin: 6px 0; letter-spacing: 1px; }
+
+  .syllabus-card {
+    background: #0b1326;
+    border: 1px solid #263554;
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+  .syllabus-card h4 { margin: 0 0 10px; font-size: 16.5px; color: #38bdf8; }
+  .syllabus-card img {
+    width: 100%;
+    max-height: 460px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #020617;
+    border: 1px solid #1e293b;
+    cursor: zoom-in;
+    display: block;
+  }
 
   .check-wrap { text-align: center; padding: 22px 12px; }
   .checkmark-circle {
@@ -187,22 +327,11 @@
   }
 
   .day-pills {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    padding: 8px 0 4px;
-    margin-top: 8px;
+    display: flex; gap: 6px; overflow-x: auto; padding: 8px 0 4px; margin-top: 8px;
   }
   .day-pill {
-    flex: 0 0 auto;
-    padding: 7px 11px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 700;
-    border: 1px solid #334155;
-    background: #0b1120;
-    color: #94a3b8;
-    cursor: pointer;
+    flex: 0 0 auto; padding: 7px 11px; border-radius: 8px; font-size: 12px; font-weight: 700;
+    border: 1px solid #334155; background: #0b1120; color: #94a3b8; cursor: pointer;
   }
   .day-pill.unlocked { border-color: #3b82f6; color: #e2e8f0; }
   .day-pill.active { background: #2563eb; color: #ffffff; border-color: #60a5fa; }
@@ -212,20 +341,160 @@
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
     border: 1px solid #10b981; border-radius: 14px; padding: 14px; margin-bottom: 14px;
   }
-
   .updates-list { margin: 0; padding-left: 18px; color: #e2e8f0; font-size: 13.5px; line-height: 1.7; }
+
+  /* Floating AI / Chat Button & Drawer */
+  .chat-fab {
+    position: fixed;
+    right: 16px;
+    bottom: 88px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(167, 243, 208, 0.7);
+    background: linear-gradient(145deg, #10b981, #2563eb);
+    color: #ffffff;
+    font-size: 24px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 45;
+    box-shadow: 0 6px 0 #1e3a8a, 0 14px 28px rgba(16, 185, 129, 0.45);
+    transition: transform 0.15s ease;
+  }
+  .chat-fab:hover { transform: scale(1.06); }
+  .chat-fab:active { transform: scale(0.95); }
+
+  .chat-panel {
+    position: fixed;
+    right: 12px;
+    left: 12px;
+    bottom: 158px;
+    max-width: 430px;
+    margin-left: auto;
+    background: #0d1528;
+    border: 1px solid #334155;
+    border-radius: 18px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
+    z-index: 50;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 68vh;
+  }
+  .chat-head {
+    background: linear-gradient(90deg, #059669, #2563eb);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .chat-head b { font-size: 14.5px; color: #fff; }
+  .chat-close {
+    background: rgba(15, 23, 42, 0.45);
+    border: none;
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .chat-messages {
+    padding: 12px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    flex: 1;
+    min-height: 220px;
+  }
+  .msg-bubble {
+    max-width: 86%;
+    padding: 10px 12px;
+    border-radius: 13px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    white-space: pre-line;
+    word-break: break-word;
+  }
+  .msg-user {
+    align-self: flex-end;
+    background: #2563eb;
+    color: #ffffff;
+    border-bottom-right-radius: 4px;
+  }
+  .msg-bot {
+    align-self: flex-start;
+    background: #18233c;
+    border: 1px solid #2c3e66;
+    color: #f1f5f9;
+    border-bottom-left-radius: 4px;
+  }
+  .msg-admin {
+    align-self: flex-start;
+    background: rgba(16, 185, 129, 0.16);
+    border: 1px solid rgba(16, 185, 129, 0.5);
+    color: #ecfdf5;
+    border-bottom-left-radius: 4px;
+  }
+  .msg-tag {
+    display: block;
+    font-size: 10.5px;
+    color: #6ee7b7;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .chat-input-row {
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+    border-top: 1px solid #1e293b;
+    background: #090f1d;
+  }
+  .chat-input-row input {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 13.5px;
+  }
+  .chat-send-btn {
+    padding: 0 15px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .img-zoom-modal {
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.92);
+    display: grid; place-items: center; z-index: 120; padding: 14px;
+  }
+  .img-zoom-modal img {
+    max-width: 100%; max-height: 88vh; border-radius: 12px; border: 2px solid #38bdf8;
+  }
 
   nav {
     position: fixed; bottom: 0; left: 0; right: 0;
-    background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px);
-    border-top: 1px solid #1e293b; display: flex;
-    padding: 8px 6px calc(8px + env(safe-area-inset-bottom)); z-index: 25;
+    background: rgba(10, 16, 32, 0.95); backdrop-filter: blur(14px);
+    border-top: 1px solid var(--card-border); display: flex; gap: 6px;
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom)); z-index: 25;
   }
   nav button {
-    flex: 1; background: transparent; border: none; color: #94a3b8;
-    font-size: 13px; font-weight: 700; padding: 8px; cursor: pointer; border-radius: 10px;
+    flex: 1; background: rgba(30, 41, 59, 0.55); border: 1px solid rgba(148, 163, 184, 0.14);
+    color: #94a3b8; font-size: 12px; font-weight: 700; padding: 9px 5px;
+    cursor: pointer; border-radius: 11px; transition: all 0.15s ease;
+    box-shadow: 0 2px 0 #020617;
   }
-  nav button.active { color: #38bdf8; background: rgba(56, 189, 248, 0.12); }
+  nav button:active { transform: translateY(2px); }
+  nav button.active {
+    color: #ffffff;
+    background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+    border-color: rgba(147, 197, 253, 0.5);
+    box-shadow: 0 3px 0 #1e3a8a;
+  }
 </style>
 </head>
 <body>
@@ -239,7 +508,12 @@
   <section id="homeView">
     <div id="homeCredentialsBox" class="cred-banner hidden"></div>
 
-    <button class="btn-3d-live" onclick="openLiveClass()">🔴 ফ্রি লাইভ ক্লাস</button>
+    <div class="quick-actions">
+      <button class="btn-3d-live" onclick="openLiveClass()">🔴 ফ্রি লাইভ ক্লাস</button>
+      <button class="btn-3d-syllabus" onclick="openSyllabusView()">📘 সিলেবাস</button>
+      <button class="btn-3d-ai" onclick="openAiChat()">🤖 এআই</button>
+      <button class="btn-3d-chat" onclick="openAiChat()">💬 চ্যাট</button>
+    </div>
 
     <div class="card">
       <h3 style="margin:0 0 8px;color:#38bdf8;font-size:16px">📢 লাইভ নোটিশ ও আপডেট</h3>
@@ -271,6 +545,17 @@
       <div class="course-body">
         <h3>অফিস কোর্স শিখুন বেসিক থেকে অ্যাডভান্স লেভেল</h3>
         <button class="btn" onclick="openCourseDetail('office')">কোর্স প্রিমিয়াম</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="syllabusView" class="hidden">
+    <button class="btn-back" onclick="goBack('homeView')">← ফিরে যান</button>
+    <div class="card">
+      <h3 style="margin-top:0;color:#38bdf8">📘 কোর্স সিলেবাস</h3>
+      <p style="font-size:13.5px;color:#94a3b8;margin-bottom:14px">সিলেবাসের ছবির ওপর ক্লিক করলে বড় করে দেখা যাবে।</p>
+      <div id="userSyllabusList">
+        <p style="color:#94a3b8">এখনো কোনো সিলেবাস আপডেট করা হয়নি।</p>
       </div>
     </div>
   </section>
@@ -467,10 +752,31 @@
   </section>
 </div>
 
+<!-- Floating AI / Chat Button -->
+<button id="chatFabBtn" class="chat-fab" title="এআই চ্যাট" onclick="toggleChatPanel()">🤖</button>
+
+<div id="chatPanel" class="chat-panel hidden">
+  <div class="chat-head">
+    <b>🤖 Prime Skill AI Assistant</b>
+    <button class="chat-close" onclick="toggleChatPanel()">✕</button>
+  </div>
+  <div id="chatMessagesBox" class="chat-messages"></div>
+  <div class="chat-input-row">
+    <input id="chatInput" type="text" placeholder="মেসেজ লিখুন..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+    <button class="chat-send-btn" onclick="sendChatMessage()">পাঠান</button>
+  </div>
+</div>
+
+<div id="imgZoomModal" class="img-zoom-modal hidden" onclick="this.classList.add('hidden')">
+  <img id="zoomImgEl" src="" alt="Zoom View">
+</div>
+
 <button id="exitExpandBtn" class="close-expand hidden" onclick="closeAllExpand()">✕ ছোট করুন</button>
 
 <nav>
   <button id="navHome" class="active" onclick="switchTab('homeView')">🏠 হোম</button>
+  <button id="navSyllabus" onclick="openSyllabusView()">📘 সিলেবাস</button>
+  <button id="navAi" onclick="openAiChat()">🤖 এআই</button>
   <button id="navAccount" onclick="switchTab('accountView')">🎓 অ্যাকাউন্ট</button>
 </nav>
 
@@ -535,15 +841,22 @@ const COURSES = {
 };
 
 const STORE_APPS_KEY = 'psa_local_apps_v6';
-const STORE_RESETS_KEY = 'psa_local_resets_v6';
 const STORE_SETTINGS_KEY = 'psa_local_settings_v6';
+const STORE_SYLLABUS_KEY = 'psa_local_syllabus_v1';
 const DEVICE_ID_KEY = 'psa_device_id_v6';
 const MY_APPS_KEY = 'psa_my_app_keys_v6';
+const CHAT_THREAD_KEY = 'psa_chat_thread_id_v1';
 
 let deviceId = localStorage.getItem(DEVICE_ID_KEY);
 if (!deviceId) {
   deviceId = 'DEV_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
   localStorage.setItem(DEVICE_ID_KEY, deviceId);
+}
+
+let chatThreadId = localStorage.getItem(CHAT_THREAD_KEY);
+if (!chatThreadId) {
+  chatThreadId = 'CHAT_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+  localStorage.setItem(CHAT_THREAD_KEY, chatThreadId);
 }
 
 let myAppKeys = JSON.parse(localStorage.getItem(MY_APPS_KEY) || '[]');
@@ -552,6 +865,9 @@ let pendingFormData = null;
 let siteSettings = JSON.parse(localStorage.getItem(STORE_SETTINGS_KEY) || '{"liveVideoUrl":"","coursePlaylists":{}}');
 let loggedStudent = JSON.parse(localStorage.getItem('psa_logged_student_v6') || 'null');
 let selectedDayPerCourse = {};
+let syllabusItems = JSON.parse(localStorage.getItem(STORE_SYLLABUS_KEY) || '[]');
+let chatMessages = [];
+let lastChatSig = '';
 
 function getLocalApps() { return JSON.parse(localStorage.getItem(STORE_APPS_KEY) || '[]'); }
 function saveLocalApps(list) {
@@ -560,11 +876,7 @@ function saveLocalApps(list) {
   } catch (_) {
     const lightList = list.map(item => ({
       ...item,
-      studentNidFront: '',
-      studentNidBack: '',
-      motherNidFront: '',
-      motherNidBack: '',
-      certificateImg: ''
+      studentNidFront: '', studentNidBack: '', motherNidFront: '', motherNidBack: '', certificateImg: ''
     }));
     try { localStorage.setItem(STORE_APPS_KEY, JSON.stringify(lightList)); } catch (_) {}
   }
@@ -598,12 +910,204 @@ function renderCredentialsBanner(allApps) {
 
 renderCredentialsBanner(getLocalApps());
 
+function renderSyllabusList(list) {
+  const wrap = document.getElementById('userSyllabusList');
+  if (!wrap) return;
+  if (!list || !list.length) {
+    wrap.innerHTML = '<p style="color:#94a3b8">এখনো কোনো সিলেবাস আপডেট করা হয়নি।</p>';
+    return;
+  }
+  wrap.innerHTML = list.map(item => `
+    <div class="syllabus-card">
+      <h4>📘 ${esc(item.title || 'সিলেবাস')}</h4>
+      ${item.image ? `<img src="${item.image}" alt="${esc(item.title)}" onclick="openZoomImage('${item.image}')">` : '<p style="color:#94a3b8;font-size:13px">কোনো ছবি দেওয়া হয়নি।</p>'}
+    </div>
+  `).join('');
+}
+
+function openZoomImage(src) {
+  if (!src) return;
+  document.getElementById('zoomImgEl').src = src;
+  document.getElementById('imgZoomModal').classList.remove('hidden');
+}
+
+renderSyllabusList(syllabusItems);
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function renderChatMessages() {
+  const box = document.getElementById('chatMessagesBox');
+  if (!box) return;
+  if (!chatMessages.length) {
+    box.innerHTML = `<div class="msg-bubble msg-bot">আসসালামু আলাইকুম লিখে চ্যাট শুরু করুন।</div>`;
+    return;
+  }
+  box.innerHTML = chatMessages.map(m => {
+    if (m.sender === 'user') {
+      return `<div class="msg-bubble msg-user">${esc(m.text)}</div>`;
+    }
+    if (m.sender === 'admin') {
+      return `<div class="msg-bubble msg-admin"><span class="msg-tag">👨‍🏫 অ্যাডমিন রিপ্লাই</span>${esc(m.text)}</div>`;
+    }
+    return `<div class="msg-bubble msg-bot">${esc(m.text)}</div>`;
+  }).join('');
+  box.scrollTop = box.scrollHeight;
+}
+
+function generateBotReply(rawText) {
+  const t = rawText.trim().toLowerCase();
+  const bn = rawText.trim();
+
+  if (
+    bn.includes('আসসালামু আলাইকুম') ||
+    bn.includes('আসসালাম') ||
+    t.includes('assalamu') ||
+    t.includes('salam')
+  ) {
+    return `ওয়ালাইকুম আসসালাম
+Prime skill Academy একাডেমিতে কোর্স করার জন্য আপনাকে স্বাগতম।
+আমাদের এখানে শিখতে পারবেন সম্পূর্ণ বেসিক থেকে অ্যাডভান্স কিভাবে গ্রাফিক্স ডিজাইন ফর ফ্রিল্যান্সার শিখতে হয় এবং ঘরে বসে আন্তর্জাতিক মার্কেটপ্লেসে আর্নিং করতে হয়`;
+  }
+
+  if (
+    bn.includes('এডমিশন ফ্রি') ||
+    bn.includes('এডমিশন ফি') ||
+    bn.includes('ভর্তি ফি') ||
+    bn.includes('কোর্স ফি') ||
+    bn.includes('কত টাকা') ||
+    bn.includes('দাম কত') ||
+    bn.includes('ফি কত') ||
+    t.includes('fee') ||
+    t.includes('admission')
+  ) {
+    return `আপনি কোন কোর্স করতে চাচ্ছেন দয়া করে জানান
+
+গ্রাফিক ডিজাইন ফর ফ্রিল্যান্সার
+অফিস কোর্স
+কম্পিউটার বেসিক থেকে এডভান্স`;
+  }
+
+  if (
+    bn.includes('গ্রাফিক') ||
+    bn.includes('গ্রাফিক্স') ||
+    t.includes('graphic')
+  ) {
+    return `গ্রাফিক ডিজাইন ফর ফ্রিল্যান্সার কোর্স ফি: ১০,০০০ টাকা।`;
+  }
+
+  if (
+    bn.includes('অফিস') ||
+    t.includes('office')
+  ) {
+    return `অফিস কোর্স ফি: ৪,০০০ টাকা।`;
+  }
+
+  if (
+    bn.includes('কম্পিউটার') ||
+    bn.includes('বেসিক') ||
+    t.includes('computer') ||
+    t.includes('basic')
+  ) {
+    return `কম্পিউটার বেসিক থেকে এডভান্স কোর্স ফি: ১,০০০ টাকা।`;
+  }
+
+  if (
+    bn.includes('কত দিন') ||
+    bn.includes('কত ডিন') ||
+    bn.includes('কোর্স কত দিন') ||
+    bn.includes('কত দিনের কোর্স') ||
+    bn.includes('কত ডিনার কোর্স') ||
+    bn.includes('কতদিন') ||
+    t.includes('days')
+  ) {
+    return `৩০ দিন`;
+  }
+
+  return `আপনার প্রশ্নটি রেকর্ড করা হয়েছে। আমাদের অ্যাডমিন শীঘ্রই রিপ্লাই দেবেন। এছাড়া "আসসালামু আলাইকুম", "এডমিশন ফি কত", বা "কত দিনের কোর্স" লিখেও জানতে পারেন।`;
+}
+
+async function pushChatNode(msgObj) {
+  const key = 'MSG_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+  try {
+    await fetch(`${DB_URL}/psa_chats/${chatThreadId}/${key}.json`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(msgObj)
+    });
+  } catch (_) {}
+}
+
+async function sendChatMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+
+  const now = Date.now();
+  const userMsg = {
+    sender: 'user',
+    text,
+    threadId: chatThreadId,
+    studentName: (loggedStudent && loggedStudent.studentName) || 'ভিজিটর',
+    deviceId,
+    time: now
+  };
+  chatMessages.push(userMsg);
+  renderChatMessages();
+  await pushChatNode(userMsg);
+
+  const botReplyText = generateBotReply(text);
+  const botMsg = {
+    sender: 'bot',
+    text: botReplyText,
+    threadId: chatThreadId,
+    time: now + 5
+  };
+  chatMessages.push(botMsg);
+  renderChatMessages();
+  await pushChatNode(botMsg);
+}
+
+function toggleChatPanel() {
+  const panel = document.getElementById('chatPanel');
+  panel.classList.toggle('hidden');
+  if (!panel.classList.contains('hidden')) {
+    renderChatMessages();
+    setTimeout(() => document.getElementById('chatInput').focus(), 80);
+  }
+}
+
+function openAiChat() {
+  const panel = document.getElementById('chatPanel');
+  panel.classList.remove('hidden');
+  renderChatMessages();
+  setTimeout(() => document.getElementById('chatInput').focus(), 80);
+}
+
+async function syncChatFromFirebase() {
+  try {
+    const res = await fetch(`${DB_URL}/psa_chats/${chatThreadId}.json`);
+    if (!res.ok) return;
+    const val = await res.json();
+    const list = val ? Object.entries(val).map(([k, v]) => ({ _key: k, ...v })).sort((a, b) => (a.time || 0) - (b.time || 0)) : [];
+    const sig = list.map(x => `${x._key}|${x.sender}|${x.text}`).join(';;');
+    if (sig !== lastChatSig) {
+      lastChatSig = sig;
+      chatMessages = list;
+      renderChatMessages();
+    }
+  } catch (_) {}
+}
+
 async function syncFromFirebase() {
   try {
-    const [appsRes, settingsRes, postsRes] = await Promise.all([
+    const [appsRes, settingsRes, postsRes, sylRes] = await Promise.all([
       fetch(`${DB_URL}/psa_applications.json`),
       fetch(`${DB_URL}/psa_settings.json`),
-      fetch(`${DB_URL}/posts.json`)
+      fetch(`${DB_URL}/posts.json`),
+      fetch(`${DB_URL}/psa_syllabus.json`)
     ]);
 
     if (appsRes.ok) {
@@ -623,6 +1127,14 @@ async function syncFromFirebase() {
       }
     }
 
+    if (sylRes.ok) {
+      const sylVal = await sylRes.json();
+      const arr = sylVal ? Object.entries(sylVal).map(([k, v]) => ({ _key: k, ...v })).sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0)) : [];
+      syllabusItems = arr;
+      try { localStorage.setItem(STORE_SYLLABUS_KEY, JSON.stringify(arr)); } catch (_) {}
+      renderSyllabusList(syllabusItems);
+    }
+
     if (postsRes.ok) {
       const pVal = await postsRes.json();
       const ul = document.getElementById('livePostsList');
@@ -637,6 +1149,8 @@ async function syncFromFirebase() {
         });
       }
     }
+
+    await syncChatFromFirebase();
   } catch (err) {
     console.warn('Sync error:', err);
   }
@@ -646,14 +1160,21 @@ syncFromFirebase();
 setInterval(syncFromFirebase, 3000);
 
 function switchTab(viewId) {
-  ['homeView','liveView','detailView','formView','paymentView','pendingView','accountView'].forEach(id => {
+  ['homeView','syllabusView','liveView','detailView','formView','paymentView','pendingView','accountView'].forEach(id => {
     document.getElementById(id).classList.toggle('hidden', id !== viewId);
   });
   document.getElementById('navHome').classList.toggle('active', viewId === 'homeView');
+  document.getElementById('navSyllabus').classList.toggle('active', viewId === 'syllabusView');
+  document.getElementById('navAi').classList.remove('active');
   document.getElementById('navAccount').classList.toggle('active', viewId === 'accountView');
   if (viewId === 'homeView') renderCredentialsBanner(getLocalApps());
+  if (viewId === 'syllabusView') renderSyllabusList(syllabusItems);
   if (viewId === 'accountView') refreshAccountUI();
   window.scrollTo(0, 0);
+}
+
+function openSyllabusView() {
+  switchTab('syllabusView');
 }
 
 function goBack(viewId) { switchTab(viewId); }
@@ -733,14 +1254,13 @@ function readFileAsDataUrl(file) {
   });
 }
 
-async function compressImage(file) {
+async function compressImage(file, maxSide = 460, quality = 0.52) {
   const rawDataUrl = await readFileAsDataUrl(file);
   if (!rawDataUrl) return '';
   return new Promise((resolve) => {
     const img = new Image();
     img.onload = () => {
       try {
-        const maxSide = 460;
         const w = img.naturalWidth || img.width || maxSide;
         const h = img.naturalHeight || img.height || maxSide;
         const scale = Math.min(1, maxSide / Math.max(w, h));
@@ -751,7 +1271,7 @@ async function compressImage(file) {
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        resolve(canvas.toDataURL('image/jpeg', 0.52) || rawDataUrl);
+        resolve(canvas.toDataURL('image/jpeg', quality) || rawDataUrl);
       } catch (_) {
         resolve(rawDataUrl);
       }
@@ -859,11 +1379,7 @@ async function submitPayment() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...fbPayload,
-          studentNidFront: '',
-          studentNidBack: '',
-          motherNidFront: '',
-          motherNidBack: '',
-          certificateImg: ''
+          studentNidFront: '', studentNidBack: '', motherNidFront: '', motherNidBack: '', certificateImg: ''
         })
       });
     }
