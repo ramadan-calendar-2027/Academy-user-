@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prime Skill Academy</title>
+<style>
+  :root {
+    --bg: #070b19;
+    --card: #0f172a;
+    --card-border: #1e293b;
+    --primary: #3b82f6;
+    --accent: #06b6d4;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --success: #10b981;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: radial-gradient(circle at top, #0f1c3f 0%, var(--bg) 55%);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, "Noto Sans Bengali", sans-serif;
+    min-height: 100vh;
+    padding-bottom: 85px;
+  }
+  header {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 18px 16px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    background: linear-gradient(90deg, #60a5fa, #22d3ee, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  header p { margin: 6px 0 0; font-size: 13.5px; color: #cbd5e1; line-height: 1.5; }
+  .wrap { max-width: 760px; margin: auto; padding: 14px; }
+  .hidden { display: none !important; }
+
+  .btn-3d-live {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    margin: 14px 0 22px;
+    font-size: 17px;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+    border: 1px solid #60a5fa;
+    border-radius: 14px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 6px 0 #1e3a8a, 0 12px 24px rgba(37, 99, 235, 0.45);
+    transition: transform 0.12s, box-shadow 0.12s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .btn-3d-live:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #1e3a8a, 0 6px 12px rgba(37, 99, 235, 0.35);
+  }
+  .btn-3d-live::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -120%;
+    width: 80%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.85), rgba(255,255,255,0.9), transparent);
+    transform: skewX(-25deg);
+    animation: sweepBlue 2.4s infinite linear;
+  }
+  @keyframes sweepBlue {
+    0% { left: -120%; }
+    100% { left: 160%; }
+  }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 18px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e2e8f0;
+  }
+  .section-title::before {
+    content: "";
+    width: 4px; height: 20px;
+    background: linear-gradient(180deg, #3b82f6, #06b6d4);
+    border-radius: 4px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  }
+  .course-card { padding: 0; overflow: hidden; }
+  .course-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; background: #1e293b; }
+  .course-body { padding: 16px; }
+  .course-body h3 { margin: 0 0 12px; font-size: 18px; color: #f8fafc; }
+
+  button.btn {
+    width: 100%; padding: 13px 16px; border: none; border-radius: 12px;
+    background: linear-gradient(135deg, #2563eb, #0284c7); color: white;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  }
+  button.btn-green { background: linear-gradient(135deg, #059669, #10b981); }
+  button.btn-back {
+    background: #1e293b; color: #e2e8f0; border: 1px solid #334155;
+    padding: 9px 14px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    cursor: pointer; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 6px;
+  }
+
+  label { display: block; font-size: 13.5px; color: #cbd5e1; margin: 10px 0 4px; font-weight: 600; }
+  input, select {
+    width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #334155;
+    background: #0b1120; color: #f8fafc; font-size: 14px; outline: none;
+  }
+  input[type="file"] { padding: 9px; font-size: 12.5px; }
+
+  .fee-display {
+    background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 12px; padding: 12px; margin: 12px 0; text-align: center;
+  }
+  .fee-display b { font-size: 24px; color: #34d399; display: block; margin-top: 4px; }
+
+  .pay-box {
+    background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.4);
+    border-radius: 12px; padding: 14px; text-align: center; margin: 12px 0;
+  }
+  .pay-number { font-size: 24px; font-weight: 800; color: #fbbf24; margin: 6px 0; letter-spacing: 1px; }
+
+  .check-wrap { text-align: center; padding: 22px 12px; }
+  .checkmark-circle {
+    width: 82px; height: 82px; border-radius: 50%;
+    background: rgba(16, 185, 129, 0.18); border: 3.5px solid #10b981;
+    display: grid; place-items: center; margin: 0 auto 14px;
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.45);
+    animation: popScale 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .checkmark-circle svg {
+    width: 44px; height: 44px; stroke: #10b981; stroke-width: 4; fill: none;
+    stroke-dasharray: 60; stroke-dashoffset: 60;
+    animation: drawCheck 0.55s 0.15s forwards ease-out;
+  }
+  @keyframes popScale { 0% { transform: scale(0.3); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+  @keyframes drawCheck { to { stroke-dashoffset: 0; } }
+
+  .video-box {
+    position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000;
+    border-radius: 12px; overflow: hidden; border: 1px solid #334155;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+  .video-controls { display: flex; gap: 8px; margin-top: 8px; }
+  .video-controls button {
+    flex: 1; padding: 9px; border-radius: 8px; border: 1px solid #334155;
+    background: #1e293b; color: #e2e8f0; font-size: 12.5px; font-weight: 600; cursor: pointer;
+  }
+  .video-box.expanded { position: fixed; inset: 10px; z-index: 99; width: auto; height: auto; aspect-ratio: auto; }
+  .close-expand {
+    position: fixed; top: 18px; right: 18px; z-index: 100;
+    background: #ef4444; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: 700; cursor: pointer;
+  }
+
+  .day-pills {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 8px 0 4px;
+    margin-top: 8px;
+  }
+  .day-pill {
+    flex: 0 0 auto;
+    padding: 7px 11px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid #334155;
+    background: #0b1120;
+    color: #94a3b8;
+    cursor: pointer;
+  }
+  .day-pill.unlocked { border-color: #3b82f6; color: #e2e8f0; }
+  .day-pill.active { background: #2563eb; color: #ffffff; border-color: #60a5fa; }
+  .day-pill.locked { opacity: 0.5; cursor: not-allowed; }
+
+  .cred-banner {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
+    border: 1px solid #10b981; border-radius: 14px; padding: 14px; margin-bottom: 14px;
+  }
+
+  .updates-list { margin: 0; padding-left: 18px; color: #e2e8f0; font-size: 13.5px; line-height: 1.7; }
+
+  nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px);
+    border-top: 1px solid #1e293b; display: flex;
+    padding: 8px 6px calc(8px + env(safe-area-inset-bottom)); z-index: 25;
+  }
+  nav button {
+    flex: 1; background: transparent; border: none; color: #94a3b8;
+    font-size: 13px; font-weight: 700; padding: 8px; cursor: pointer; border-radius: 10px;
+  }
+  nav button.active { color: #38bdf8; background: rgba(56, 189, 248, 0.12); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Prime Skill Academy</h1>
+  <p>প্রাইম স্কিল একাডেমির মাধ্যমে<br>শিখুন দক্ষতা, গড়ুন ভবিষ্যৎ, এগিয়ে যান সফলতার পথে।</p>
+</header>
+
+<div class="wrap">
+  <section id="homeView">
+    <div id="homeCredentialsBox" class="cred-banner hidden"></div>
+
+    <button class="btn-3d-live" onclick="openLiveClass()">🔴 ফ্রি লাইভ ক্লাস</button>
+
+    <div class="card">
+      <h3 style="margin:0 0 8px;color:#38bdf8;font-size:16px">📢 লাইভ নোটিশ ও আপডেট</h3>
+      <ul id="livePostsList" class="updates-list">
+        <li>কোনো ডাটা নেই</li>
+      </ul>
+    </div>
+
+    <div class="section-title">প্রিমিয়াম কোর্সসমূহ</div>
+
+    <div class="card course-card">
+      <img id="homeImgGraphic" src="33625.jpg" alt="গ্রাফিক্স ডিজাইন ফর ফ্রিল্যান্সার" class="course-img">
+      <div class="course-body">
+        <h3>গ্রাফিক্স ডিজাইন ফর ফ্রিল্যান্সার</h3>
+        <button class="btn" onclick="openCourseDetail('graphic')">প্রিমিয়াম কিনুন</button>
+      </div>
+    </div>
+
+    <div class="card course-card">
+      <img id="homeImgBasic" src="33626.jpg" alt="কম্পিউটার বেসিক থেকে এডভান্স শিখুন" class="course-img">
+      <div class="course-body">
+        <h3>কম্পিউটার বেসিক থেকে এডভান্স শিখুন</h3>
+        <button class="btn" onclick="openCourseDetail('basic')">কোর্স প্রিমিয়াম কিনুন</button>
+      </div>
+    </div>
+
+    <div class="card course-card">
+      <img id="homeImgOffice" src="33627.jpg" alt="অফিস কোর্স শিখুন বেসিক থেকে অ্যাডভান্স লেভেল" class="course-img">
+      <div class="course-body">
+        <h3>অফিস কোর্স শিখুন বেসিক থেকে অ্যাডভান্স লেভেল</h3>
+        <button class="btn" onclick="openCourseDetail('office')">কোর্স প্রিমিয়াম</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="liveView" class="hidden">
+    <button class="btn-back" onclick="goBack('homeView')">← ফিরে যান</button>
+    <div class="card">
+      <h3 style="margin-top:0;color:#38bdf8">🔴 লাইভ ক্লাস সরাসরি</h3>
+      <p style="font-size:13.5px;color:#cbd5e1;margin-bottom:12px">প্রতিদিন রাত ৮:০০ টায় ফ্রি লাইভ ক্লাস সরাসরি অনুষ্ঠিত হয়।</p>
+      <div id="liveScheduleNotice" class="pay-box" style="margin-bottom:12px"></div>
+      <div id="liveVideoWrapper" class="hidden">
+        <div id="livePlayerBox" class="video-box">
+          <iframe id="liveIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-controls">
+          <button onclick="toggleExpand('livePlayerBox')">⛶ ভিডিও বড় / ছোট করুন</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="detailView" class="hidden">
+    <button class="btn-back" onclick="goBack('homeView')">← ফিরে যান</button>
+    <div class="card course-card">
+      <img id="detailImg" src="" alt="Course Banner" class="course-img">
+      <div class="course-body">
+        <h3 id="detailTitle"></h3>
+        <p style="color:#94a3b8;font-size:14px;line-height:1.6">৩০ দিনব্যাপী লাইভ ক্লাস সরাসরি। প্রতিদিন ২৪ ঘণ্টা পরপর নতুন লাইভ ক্লাস আনলক হবে। ভর্তি হতে নিচের আবেদন বাটনে ক্লিক করুন।</p>
+        <button class="btn btn-green" onclick="openApplyForm()">আবেদন করুন</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="formView" class="hidden">
+    <button class="btn-back" onclick="goBack('detailView')">← ফিরে যান</button>
+    <div class="card">
+      <h3 style="margin-top:0">কোর্স আবেদন ফরম</h3>
+      <form id="admissionForm">
+        <label>কোর্সের নাম</label>
+        <select id="fCourse" onchange="updateCourseFee()">
+          <option value="graphic">গ্রাফিক ডিজাইন ফর ফ্রিল্যান্সার</option>
+          <option value="basic">কম্পিউটার বেসিক টু অ্যাডভান্স</option>
+          <option value="office">অফিস কোর্স</option>
+        </select>
+
+        <div class="fee-display">
+          <span style="font-size:13px;color:#a7f3d0">কোর্স ফি</span>
+          <b id="fAmountText">১০,০০০ টাকা</b>
+        </div>
+
+        <label>স্টুডেন্টের নাম</label>
+        <input id="fStudentName" type="text">
+
+        <label>পিতার নাম</label>
+        <input id="fFatherName" type="text">
+
+        <label>মাতার নাম</label>
+        <input id="fMotherName" type="text">
+
+        <label>জন্ম তারিখ</label>
+        <input id="fDob" type="date">
+
+        <label>স্টুডেন্ট এনআইডি নম্বর</label>
+        <input id="fStudentNid" type="text">
+
+        <label>মাতার এনআইডি নম্বর</label>
+        <input id="fMotherNid" type="text">
+
+        <label>স্টুডেন্ট এনআইডি কার্ডের ছবি / ফটোকপি (সামনের পার্ট)</label>
+        <input id="fStudentNidFront" type="file" accept="image/*">
+
+        <label>স্টুডেন্ট এনআইডি কার্ডের ছবি / ফটোকপি (পিছনের পার্ট)</label>
+        <input id="fStudentNidBack" type="file" accept="image/*">
+
+        <label>মাতার এনআইডি কার্ডের ছবি / ফটোকপি (সামনের পার্ট)</label>
+        <input id="fMotherNidFront" type="file" accept="image/*">
+
+        <label>মাতার এনআইডি কার্ডের ছবি / ফটোকপি (পিছনের পার্ট)</label>
+        <input id="fMotherNidBack" type="file" accept="image/*">
+
+        <label>স্টুডেন্ট ফোন নম্বর</label>
+        <input id="fStudentPhone" type="text">
+
+        <label>বাসার গার্জিয়ান ফোন নম্বর</label>
+        <input id="fGuardianPhone" type="text">
+
+        <label>এলাকার নাম (এনআইডি কার্ড অনুযায়ী)</label>
+        <input id="fAddress" type="text">
+
+        <label>লিঙ্গ</label>
+        <select id="fGender">
+          <option value="পুরুষ">পুরুষ</option>
+          <option value="মহিলা">মহিলা</option>
+          <option value="অন্যান্য">অন্যান্য</option>
+        </select>
+
+        <label>শিক্ষাগত যোগ্যতা / কোন ক্লাস</label>
+        <select id="fClass">
+          <option value="এসএসসি (SSC)">এসএসসি (SSC)</option>
+          <option value="এইচএসসি (HSC)">এইচএসসি (HSC)</option>
+          <option value="ডিপ্লোমা / সমমান">ডিপ্লোমা / সমমান</option>
+          <option value="অনার্স / ডিগ্রি (চলমান)">অনার্স / ডিগ্রি (চলমান)</option>
+          <option value="গ্র্যাজুয়েট (Graduate)">গ্র্যাজুয়েট (Graduate)</option>
+        </select>
+
+        <label>স্টুডেন্ট সার্টিফিকেট ছবি / ফটোকপি</label>
+        <input id="fCertificate" type="file" accept="image/*">
+
+        <button class="btn" type="submit" style="margin-top:16px">সাবমিট করুন</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="paymentView" class="hidden">
+    <button class="btn-back" onclick="goBack('formView')">← ফিরে যান</button>
+    <div class="card">
+      <h3 style="margin-top:0">কোর্স ফি পেমেন্ট</h3>
+      <div class="fee-display">
+        <span style="font-size:13px;color:#a7f3d0">পরিশোধযোগ্য কোর্স ফি</span>
+        <b id="payCourseFee">১০,০০০ টাকা</b>
+      </div>
+
+      <label>পেমেন্ট মাধ্যম নির্বাচন করুন</label>
+      <select id="payGateway" onchange="updatePayLabel()">
+        <option value="বিকাশ">বিকাশ (bKash)</option>
+        <option value="নগদ">নগদ (Nagad)</option>
+      </select>
+
+      <div class="pay-box">
+        <div id="payGatewayTitle" style="font-weight:700;color:#fde68a">বিকাশ পার্সোনাল নম্বর</div>
+        <div class="pay-number">01956257247</div>
+        <div style="font-size:14px;font-weight:700;color:#38bdf8">সেন্ড মানি করুন</div>
+      </div>
+
+      <label>যে নম্বর থেকে টাকা পাঠিয়েছেন</label>
+      <input id="paySenderPhone" type="text">
+
+      <label>ট্রানজেকশন আইডি (TrxID)</label>
+      <input id="payTrxId" type="text">
+
+      <button type="button" class="btn btn-green" style="margin-top:14px" onclick="submitPayment()">সাবমিট করুন</button>
+    </div>
+  </section>
+
+  <section id="pendingView" class="hidden">
+    <div class="card check-wrap">
+      <div class="checkmark-circle">
+        <svg viewBox="0 0 52 52"><path d="M14 27 l8 8 l16 -16"/></svg>
+      </div>
+      <h3 style="color:#34d399;margin-bottom:8px">✓ আবেদন ও পেমেন্ট জমা হয়েছে!</h3>
+      <p style="color:#e2e8f0;font-size:15px;line-height:1.7">
+        অনুগ্রহ করে অপেক্ষা করুন আপনার অনুরোধটি যাচাই করা হচ্ছে।<br>যাচাই করার পর আপনাকে জানানো হবে।
+      </p>
+      <button class="btn" style="margin-top:14px" onclick="goBack('homeView')">হোমে ফিরে যান</button>
+    </div>
+  </section>
+
+  <section id="accountView" class="hidden">
+    <div id="studentLoginBox" class="card">
+      <h3 style="margin-top:0">স্টুডেন্ট অ্যাকাউন্ট লগইন</h3>
+      <p style="font-size:13.5px;color:#94a3b8">অ্যাডমিন কর্তৃক প্রদত্ত ইউজারনেম এবং পাসওয়ার্ড দিয়ে লগইন করুন।</p>
+      <label>ইউজারনেম</label>
+      <input id="loginUser" type="text">
+      <label>পাসওয়ার্ড</label>
+      <input id="loginPass" type="text">
+      <button class="btn" style="margin-top:14px" onclick="studentLogin()">লগইন করুন</button>
+
+      <div style="text-align:center;margin-top:14px">
+        <button type="button" style="background:none;border:none;color:#38bdf8;font-size:13.5px;cursor:pointer;text-decoration:underline" onclick="toggleForgotBox()">পাসওয়ার্ড ভুলে গেছেন? রিকোয়েস্ট পাঠান</button>
+      </div>
+
+      <div id="forgotBox" class="hidden" style="margin-top:14px;padding-top:14px;border-top:1px solid #1e293b">
+        <label>আপনার ইউজারনেম দিন</label>
+        <input id="forgotUsername" type="text">
+        <button type="button" class="btn btn-green" style="margin-top:8px" onclick="sendResetRequest()">নতুন পাসওয়ার্ডের রিকোয়েস্ট পাঠান</button>
+        <p id="forgotMsg" style="font-size:13px;color:#34d399;margin-top:8px"></p>
+      </div>
+    </div>
+
+    <div id="studentDashboard" class="hidden">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <h3 id="dashStudentName" style="margin:0">স্বাগতম</h3>
+            <span id="dashUsername" style="font-size:12.5px;color:#94a3b8"></span>
+          </div>
+          <button onclick="studentLogout()" style="background:#ef4444;color:white;border:none;padding:7px 12px;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer">লগআউট</button>
+        </div>
+      </div>
+
+      <div class="section-title">আপনার অনুমোদিত কোর্সসমূহ (৩০ দিনের লাইভ ক্লাস সরাসরি)</div>
+      <div id="enrolledCoursesList"></div>
+    </div>
+  </section>
+</div>
+
+<button id="exitExpandBtn" class="close-expand hidden" onclick="closeAllExpand()">✕ ছোট করুন</button>
+
+<nav>
+  <button id="navHome" class="active" onclick="switchTab('homeView')">🏠 হোম</button>
+  <button id="navAccount" onclick="switchTab('accountView')">🎓 অ্যাকাউন্ট</button>
+</nav>
+
+<script>
+const DB_URL = "https://crime-skill-academy-default-rtdb.firebaseio.com";
+
+function createCanvasBanner(labelText, colorStart, colorEnd) {
+  try {
+    const c = document.createElement('canvas');
+    c.width = 800;
+    c.height = 450;
+    const ctx = c.getContext('2d');
+    const grad = ctx.createLinearGradient(0, 0, 800, 450);
+    grad.addColorStop(0, colorStart);
+    grad.addColorStop(1, colorEnd);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 800, 450);
+
+    ctx.fillStyle = 'rgba(255,255,255,0.08)';
+    ctx.beginPath();
+    ctx.arc(690, 90, 140, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 34px sans-serif';
+    ctx.fillText(labelText, 44, 215);
+
+    ctx.fillStyle = 'rgba(255,255,255,0.88)';
+    ctx.font = '22px sans-serif';
+    ctx.fillText('Prime Skill Academy', 44, 265);
+    return c.toDataURL('image/jpeg', 0.8);
+  } catch (_) {
+    return '';
+  }
+}
+
+const FALLBACK_BANNERS = {
+  graphic: createCanvasBanner('Graphic Design for Freelancer', '#1d4ed8', '#06b6d4'),
+  basic: createCanvasBanner('Computer Basic to Advance', '#0f766e', '#2563eb'),
+  office: createCanvasBanner('Office Course Complete', '#4f46e5', '#0284c7')
+};
+
+function attachBannerFallback(imgEl, srcUrl, fallbackUrl) {
+  if (!imgEl) return;
+  imgEl.onerror = function () {
+    if (this.dataset.fbApplied) return;
+    this.dataset.fbApplied = '1';
+    if (fallbackUrl) this.src = fallbackUrl;
+  };
+  imgEl.dataset.fbApplied = '';
+  imgEl.src = srcUrl;
+}
+
+attachBannerFallback(document.getElementById('homeImgGraphic'), '33625.jpg', FALLBACK_BANNERS.graphic);
+attachBannerFallback(document.getElementById('homeImgBasic'), '33626.jpg', FALLBACK_BANNERS.basic);
+attachBannerFallback(document.getElementById('homeImgOffice'), '33627.jpg', FALLBACK_BANNERS.office);
+
+const COURSES = {
+  graphic: { key: 'graphic', title: 'গ্রাফিক্স ডিজাইন ফর ফ্রিল্যান্সার', fee: 10000, feeText: '১০,০০০ টাকা', img: '33625.jpg', fallback: FALLBACK_BANNERS.graphic },
+  basic:   { key: 'basic',   title: 'কম্পিউটার বেসিক থেকে এডভান্স শিখুন', fee: 1000,  feeText: '১,০০০ টাকা',  img: '33626.jpg', fallback: FALLBACK_BANNERS.basic },
+  office:  { key: 'office',  title: 'অফিস কোর্স শিখুন বেসিক থেকে অ্যাডভান্স লেভেল', fee: 4000, feeText: '৪,০০০ টাকা', img: '33627.jpg', fallback: FALLBACK_BANNERS.office }
+};
+
+const STORE_APPS_KEY = 'psa_local_apps_v6';
+const STORE_RESETS_KEY = 'psa_local_resets_v6';
+const STORE_SETTINGS_KEY = 'psa_local_settings_v6';
+const DEVICE_ID_KEY = 'psa_device_id_v6';
+const MY_APPS_KEY = 'psa_my_app_keys_v6';
+
+let deviceId = localStorage.getItem(DEVICE_ID_KEY);
+if (!deviceId) {
+  deviceId = 'DEV_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+  localStorage.setItem(DEVICE_ID_KEY, deviceId);
+}
+
+let myAppKeys = JSON.parse(localStorage.getItem(MY_APPS_KEY) || '[]');
+let selectedCourseKey = 'graphic';
+let pendingFormData = null;
+let siteSettings = JSON.parse(localStorage.getItem(STORE_SETTINGS_KEY) || '{"liveVideoUrl":"","coursePlaylists":{}}');
+let loggedStudent = JSON.parse(localStorage.getItem('psa_logged_student_v6') || 'null');
+let selectedDayPerCourse = {};
+
+function getLocalApps() { return JSON.parse(localStorage.getItem(STORE_APPS_KEY) || '[]'); }
+function saveLocalApps(list) {
+  try {
+    localStorage.setItem(STORE_APPS_KEY, JSON.stringify(list));
+  } catch (_) {
+    const lightList = list.map(item => ({
+      ...item,
+      studentNidFront: '',
+      studentNidBack: '',
+      motherNidFront: '',
+      motherNidBack: '',
+      certificateImg: ''
+    }));
+    try { localStorage.setItem(STORE_APPS_KEY, JSON.stringify(lightList)); } catch (_) {}
+  }
+}
+
+function renderCredentialsBanner(allApps) {
+  myAppKeys = JSON.parse(localStorage.getItem(MY_APPS_KEY) || '[]');
+  const list = allApps.filter(x =>
+    x.status === 'approved' &&
+    x.assignedUsername &&
+    x.assignedPassword &&
+    (x.deviceId === deviceId || myAppKeys.includes(x._key))
+  );
+
+  const box = document.getElementById('homeCredentialsBox');
+  if (!list.length) {
+    box.classList.add('hidden');
+    return;
+  }
+  box.classList.remove('hidden');
+  box.innerHTML = list.map(item => `
+    <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed rgba(255,255,255,0.2)">
+      <div style="font-weight:700;color:#34d399">✅ ${item.resetNotice ? 'নতুন পাসওয়ার্ড এসেছে! এটি দিয়ে লগইন করুন:' : 'আপনার কোর্স আবেদন অনুমোদিত হয়েছে!'}</div>
+      <div style="font-size:13.5px;margin-top:4px">
+        কোর্স: <b>${item.courseTitle}</b><br>
+        ইউজারনেম: <b style="color:#38bdf8">${item.assignedUsername}</b> | পাসওয়ার্ড: <b style="color:#fbbf24">${item.assignedPassword}</b>
+      </div>
+    </div>
+  `).join('');
+}
+
+renderCredentialsBanner(getLocalApps());
+
+async function syncFromFirebase() {
+  try {
+    const [appsRes, settingsRes, postsRes] = await Promise.all([
+      fetch(`${DB_URL}/psa_applications.json`),
+      fetch(`${DB_URL}/psa_settings.json`),
+      fetch(`${DB_URL}/posts.json`)
+    ]);
+
+    if (appsRes.ok) {
+      const val = await appsRes.json();
+      const cloudList = val ? Object.entries(val).map(([k, v]) => ({ _key: k, ...v })) : [];
+      saveLocalApps(cloudList);
+      renderCredentialsBanner(cloudList);
+      if (loggedStudent) renderEnrolledCourses();
+    }
+
+    if (settingsRes.ok) {
+      const sVal = await settingsRes.json();
+      if (sVal) {
+        siteSettings = sVal;
+        try { localStorage.setItem(STORE_SETTINGS_KEY, JSON.stringify(siteSettings)); } catch (_) {}
+        if (loggedStudent) renderEnrolledCourses();
+      }
+    }
+
+    if (postsRes.ok) {
+      const pVal = await postsRes.json();
+      const ul = document.getElementById('livePostsList');
+      ul.innerHTML = '';
+      if (!pVal) {
+        ul.innerHTML = '<li>কোনো ডাটা নেই</li>';
+      } else {
+        Object.values(pVal).reverse().forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = `${item.message} (${item.time})`;
+          ul.appendChild(li);
+        });
+      }
+    }
+  } catch (err) {
+    console.warn('Sync error:', err);
+  }
+}
+
+syncFromFirebase();
+setInterval(syncFromFirebase, 3000);
+
+function switchTab(viewId) {
+  ['homeView','liveView','detailView','formView','paymentView','pendingView','accountView'].forEach(id => {
+    document.getElementById(id).classList.toggle('hidden', id !== viewId);
+  });
+  document.getElementById('navHome').classList.toggle('active', viewId === 'homeView');
+  document.getElementById('navAccount').classList.toggle('active', viewId === 'accountView');
+  if (viewId === 'homeView') renderCredentialsBanner(getLocalApps());
+  if (viewId === 'accountView') refreshAccountUI();
+  window.scrollTo(0, 0);
+}
+
+function goBack(viewId) { switchTab(viewId); }
+
+function toSingleEmbedUrl(url) {
+  if (!url) return '';
+  const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|live\/|shorts\/))([a-zA-Z0-9_-]{11})/);
+  if (m) return `https://www.youtube.com/embed/${m[1]}?rel=0&modestbranding=1`;
+  return url;
+}
+
+function buildPlaylistDayEmbed(playlistUrl, dayIndex) {
+  if (!playlistUrl) return '';
+  const listMatch = playlistUrl.match(/[?&]list=([a-zA-Z0-9_-]+)/);
+  if (listMatch) {
+    const listId = listMatch[1];
+    return `https://www.youtube.com/embed/videoseries?list=${listId}&index=${dayIndex}&rel=0&modestbranding=1`;
+  }
+  return toSingleEmbedUrl(playlistUrl);
+}
+
+function openLiveClass() {
+  switchTab('liveView');
+  const hour = new Date().getHours();
+  const notice = document.getElementById('liveScheduleNotice');
+  const wrapper = document.getElementById('liveVideoWrapper');
+  const iframe = document.getElementById('liveIframe');
+
+  if (hour === 20) {
+    const embed = toSingleEmbedUrl(siteSettings.liveVideoUrl);
+    if (embed) {
+      notice.innerHTML = '<b style="color:#34d399">🟢 এখন রাত ৮টা — লাইভ ক্লাস সরাসরি চলছে!</b>';
+      iframe.src = embed;
+      wrapper.classList.remove('hidden');
+    } else {
+      notice.innerHTML = '<b>রাত ৮:০০ টা বেজেছে, তবে অ্যাডমিন এখনো লাইভ ক্লাস সরাসরি লিংক যুক্ত করেননি।</b>';
+      wrapper.classList.add('hidden');
+    }
+  } else {
+    notice.innerHTML = '<b>⏰ ফ্রি লাইভ ক্লাস প্রতিদিন রাত ৮:০০ টায় শুরু হয়।</b><br><span style="font-size:13px;color:#cbd5e1">রাত ৮টা বাজলে এখানে সরাসরি লাইভ ক্লাস চালু হবে।</span>';
+    iframe.src = '';
+    wrapper.classList.add('hidden');
+  }
+}
+
+function openCourseDetail(key) {
+  selectedCourseKey = key;
+  const c = COURSES[key];
+  attachBannerFallback(document.getElementById('detailImg'), c.img, c.fallback);
+  document.getElementById('detailTitle').textContent = c.title;
+  switchTab('detailView');
+}
+
+function openApplyForm() {
+  document.getElementById('fCourse').value = selectedCourseKey;
+  updateCourseFee();
+  switchTab('formView');
+}
+
+function updateCourseFee() {
+  const key = document.getElementById('fCourse').value;
+  selectedCourseKey = key;
+  document.getElementById('fAmountText').textContent = COURSES[key].feeText;
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve) => {
+    if (!file) return resolve('');
+    try {
+      const reader = new FileReader();
+      reader.onload = () => resolve(typeof reader.result === 'string' ? reader.result : '');
+      reader.onerror = () => resolve('');
+      reader.readAsDataURL(file);
+    } catch (_) {
+      resolve('');
+    }
+  });
+}
+
+async function compressImage(file) {
+  const rawDataUrl = await readFileAsDataUrl(file);
+  if (!rawDataUrl) return '';
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const maxSide = 460;
+        const w = img.naturalWidth || img.width || maxSide;
+        const h = img.naturalHeight || img.height || maxSide;
+        const scale = Math.min(1, maxSide / Math.max(w, h));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(w * scale));
+        canvas.height = Math.max(1, Math.round(h * scale));
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', 0.52) || rawDataUrl);
+      } catch (_) {
+        resolve(rawDataUrl);
+      }
+    };
+    img.onerror = () => resolve(rawDataUrl);
+    img.src = rawDataUrl;
+  });
+}
+
+document.getElementById('admissionForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.disabled = true; btn.textContent = 'প্রসেস হচ্ছে...';
+
+  const cKey = document.getElementById('fCourse').value;
+  const [sFront, sBack, mFront, mBack, cert] = await Promise.all([
+    compressImage(document.getElementById('fStudentNidFront').files[0]),
+    compressImage(document.getElementById('fStudentNidBack').files[0]),
+    compressImage(document.getElementById('fMotherNidFront').files[0]),
+    compressImage(document.getElementById('fMotherNidBack').files[0]),
+    compressImage(document.getElementById('fCertificate').files[0])
+  ]);
+
+  pendingFormData = {
+    deviceId,
+    courseKey: cKey,
+    courseTitle: COURSES[cKey].title,
+    courseFee: COURSES[cKey].fee,
+    courseFeeText: COURSES[cKey].feeText,
+    studentName: document.getElementById('fStudentName').value.trim() || 'স্টুডেন্ট',
+    fatherName: document.getElementById('fFatherName').value.trim() || '-',
+    motherName: document.getElementById('fMotherName').value.trim() || '-',
+    dob: document.getElementById('fDob').value || '-',
+    studentNid: document.getElementById('fStudentNid').value.trim() || '-',
+    motherNid: document.getElementById('fMotherNid').value.trim() || '-',
+    studentNidFront: sFront,
+    studentNidBack: sBack,
+    motherNidFront: mFront,
+    motherNidBack: mBack,
+    studentPhone: document.getElementById('fStudentPhone').value.trim() || '-',
+    guardianPhone: document.getElementById('fGuardianPhone').value.trim() || '-',
+    address: document.getElementById('fAddress').value.trim() || '-',
+    gender: document.getElementById('fGender').value,
+    studentClass: document.getElementById('fClass').value,
+    certificateImg: cert
+  };
+
+  btn.disabled = false; btn.textContent = 'সাবমিট করুন';
+  document.getElementById('payCourseFee').textContent = COURSES[cKey].feeText;
+  updatePayLabel();
+  switchTab('paymentView');
+});
+
+function updatePayLabel() {
+  const gw = document.getElementById('payGateway').value;
+  document.getElementById('payGatewayTitle').textContent = gw + ' পার্সোনাল নম্বর';
+}
+
+async function submitPayment() {
+  const baseData = pendingFormData || {
+    deviceId,
+    courseKey: selectedCourseKey,
+    courseTitle: COURSES[selectedCourseKey].title,
+    courseFee: COURSES[selectedCourseKey].fee,
+    courseFeeText: COURSES[selectedCourseKey].feeText,
+    studentName: 'স্টুডেন্ট',
+    fatherName: '-', motherName: '-', dob: '-',
+    studentNid: '-', motherNid: '-',
+    studentPhone: '-', guardianPhone: '-', address: '-',
+    gender: 'পুরুষ', studentClass: 'এসএসসি (SSC)',
+    studentNidFront: '', studentNidBack: '', motherNidFront: '', motherNidBack: '', certificateImg: ''
+  };
+
+  const sender = document.getElementById('paySenderPhone').value.trim() || '-';
+  const trx = document.getElementById('payTrxId').value.trim() || '-';
+  const appKey = 'APP_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+
+  const payload = {
+    _key: appKey,
+    ...baseData,
+    paymentMethod: document.getElementById('payGateway').value,
+    senderPhone: sender,
+    trxId: trx,
+    status: 'pending',
+    submittedAt: Date.now()
+  };
+
+  myAppKeys.push(appKey);
+  try { localStorage.setItem(MY_APPS_KEY, JSON.stringify(myAppKeys)); } catch (_) {}
+
+  const currentList = getLocalApps();
+  currentList.unshift(payload);
+  saveLocalApps(currentList);
+
+  const { _key, ...fbPayload } = payload;
+  try {
+    const res = await fetch(`${DB_URL}/psa_applications/${appKey}.json`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(fbPayload)
+    });
+    if (!res.ok) {
+      await fetch(`${DB_URL}/psa_applications/${appKey}.json`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...fbPayload,
+          studentNidFront: '',
+          studentNidBack: '',
+          motherNidFront: '',
+          motherNidBack: '',
+          certificateImg: ''
+        })
+      });
+    }
+  } catch (_) {}
+
+  document.getElementById('admissionForm').reset();
+  document.getElementById('paySenderPhone').value = '';
+  document.getElementById('payTrxId').value = '';
+  pendingFormData = null;
+
+  switchTab('pendingView');
+}
+
+function toggleForgotBox() { document.getElementById('forgotBox').classList.toggle('hidden'); }
+
+async function sendResetRequest() {
+  const uname = document.getElementById('forgotUsername').value.trim() || 'ইউজার';
+  const reqKey = 'RST_' + Date.now();
+  const reqObj = {
+    username: uname,
+    deviceId,
+    status: 'pending',
+    time: Date.now()
+  };
+  try {
+    await fetch(`${DB_URL}/psa_reset_requests/${reqKey}.json`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(reqObj)
+    });
+  } catch (_) {}
+  document.getElementById('forgotMsg').textContent = '✓ রিকোয়েস্ট পাঠানো হয়েছে। অ্যাডমিন নতুন পাসওয়ার্ড সেট করলে আপনার হোম পেজে দেখাবে।';
+}
+
+async function studentLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value.trim();
+  if (!u || !p) return alert('ইউজারনেম ও পাসওয়ার্ড দিন।');
+
+  let all = getLocalApps();
+  try {
+    const res = await fetch(`${DB_URL}/psa_applications.json`);
+    if (res.ok) {
+      const val = await res.json();
+      if (val) {
+        all = Object.entries(val).map(([k, v]) => ({ _key: k, ...v }));
+        saveLocalApps(all);
+      }
+    }
+  } catch (_) {}
+
+  const matches = all.filter(x => x.status === 'approved' && x.assignedUsername === u && x.assignedPassword === p);
+  if (!matches.length) {
+    return alert('ইউজারনেম বা পাসওয়ার্ড সঠিক নয়, অথবা অ্যাকাউন্ট এখনো অনুমোদিত হয়নি।');
+  }
+  loggedStudent = { username: u, password: p, studentName: matches[0].studentName };
+  try { localStorage.setItem('psa_logged_student_v6', JSON.stringify(loggedStudent)); } catch (_) {}
+  refreshAccountUI();
+}
+
+function studentLogout() {
+  loggedStudent = null;
+  try { localStorage.removeItem('psa_logged_student_v6'); } catch (_) {}
+  refreshAccountUI();
+}
+
+function refreshAccountUI() {
+  const loginBox = document.getElementById('studentLoginBox');
+  const dashBox = document.getElementById('studentDashboard');
+  if (!loggedStudent) {
+    loginBox.classList.remove('hidden');
+    dashBox.classList.add('hidden');
+    return;
+  }
+  loginBox.classList.add('hidden');
+  dashBox.classList.remove('hidden');
+  document.getElementById('dashStudentName').textContent = loggedStudent.studentName;
+  document.getElementById('dashUsername').textContent = 'ইউজারনেম: ' + loggedStudent.username;
+  renderEnrolledCourses();
+}
+
+function selectCourseDay(appKey, dayNum, unlockedDays) {
+  if (dayNum > unlockedDays) {
+    return alert(`ক্লাস ${dayNum} এখনো আনলক হয়নি। প্রতি ২৪ ঘণ্টা পরপর পরবর্তী লাইভ ক্লাস আনলক হবে।`);
+  }
+  selectedDayPerCourse[appKey] = dayNum;
+  renderEnrolledCourses();
+}
+
+function renderEnrolledCourses() {
+  if (!loggedStudent) return;
+  const all = getLocalApps();
+  const myCourses = all.filter(x => x.status === 'approved' && x.assignedUsername === loggedStudent.username);
+  const container = document.getElementById('enrolledCoursesList');
+  if (!myCourses.length) {
+    container.innerHTML = '<div class="card">কোনো সক্রিয় কোর্স পাওয়া যায়নি।</div>';
+    return;
+  }
+
+  const playlists = siteSettings.coursePlaylists || {};
+  const DAY_MS = 24 * 60 * 60 * 1000;
+
+  container.innerHTML = myCourses.map((c, idx) => {
+    const startMs = Number(c.activatedAt || c.submittedAt || Date.now());
+    const elapsedDays = Math.floor((Date.now() - startMs) / DAY_MS) + 1;
+    const unlockedDays = Math.min(30, Math.max(1, elapsedDays));
+    const activeDay = Math.min(unlockedDays, selectedDayPerCourse[c._key] || unlockedDays);
+
+    const playlistUrl = playlists[c.courseKey] || '';
+    const embed = buildPlaylistDayEmbed(playlistUrl, activeDay - 1);
+    const boxId = 'courseVidBox_' + idx;
+
+    let pillsHtml = '';
+    for (let d = 1; d <= 30; d++) {
+      const isUnlocked = d <= unlockedDays;
+      const isActive = d === activeDay;
+      pillsHtml += `<button type="button" class="day-pill ${isUnlocked ? 'unlocked' : 'locked'} ${isActive ? 'active' : ''}" onclick="selectCourseDay('${c._key}', ${d}, ${unlockedDays})">${isUnlocked ? '▶' : '🔒'} দিন ${d}</button>`;
+    }
+
+    return `
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <h3 style="margin:0;color:#38bdf8">${c.courseTitle}</h3>
+          <span style="font-size:12px;background:rgba(16,185,129,0.18);color:#34d399;padding:4px 9px;border-radius:8px;font-weight:700">আনলক: ${unlockedDays}/৩০ দিন</span>
+        </div>
+        <p style="font-size:12.5px;color:#94a3b8;margin:0 0 10px">বর্তমানে চলছে: <b style="color:#f8fafc">ক্লাস ${activeDay}</b> (প্রতি ২৪ ঘণ্টা পরপর পরবর্তী লাইভ ক্লাস আনলক হবে)</p>
+
+        ${embed ? `
+          <div id="${boxId}" class="video-box">
+            <iframe src="${embed}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="video-controls">
+            <button onclick="toggleExpand('${boxId}')">⛶ ভিডিও বড় / ছোট করুন</button>
+          </div>
+          <div class="day-pills">${pillsHtml}</div>
+        ` : `<p style="color:#94a3b8;font-size:13.5px">এই কোর্সের প্লেলিস্ট লিংক এখনো অ্যাডমিন যুক্ত করেননি।</p>`}
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleExpand(boxId) {
+  const el = document.getElementById(boxId);
+  if (!el) return;
+  el.classList.toggle('expanded');
+  document.getElementById('exitExpandBtn').classList.toggle('hidden', !el.classList.contains('expanded'));
+}
+
+function closeAllExpand() {
+  document.querySelectorAll('.video-box.expanded').forEach(el => el.classList.remove('expanded'));
+  document.getElementById('exitExpandBtn').classList.add('hidden');
+}
+</script>
+</body>
+</html>
